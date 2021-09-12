@@ -3,6 +3,13 @@
 #define NUM_LEDS 84
 #define LED_PIN 7
 #define COLOR_ORDER GRB
+
+typedef enum DisplayState{  // <-- the use of typedef is optional
+  _score,
+  _finalscore,
+  _newhs,
+  _hs
+};
 CRGB leds[NUM_LEDS];
 //LCD pin to Arduino
 //const int pin_RS = 8; 
@@ -23,6 +30,17 @@ int led_matrix[7][10]={//[matrix letters][numbers]
   {1,0,0,0,1,1,1,0,1,1},  //f
   {0,0,1,1,1,1,1,0,1,1}   //g
   };
+  
+int letter_matrix[7][26]={//[matrix letters][alpha letters]  a-z
+
+  {1,0,0,0,1,1,1,0,1,0,1,0,1,0,0,1,1,0,1,0,0,0,0,0,0,1}, //a
+  {1,0,0,1,0,0,0,0,0,1,0,0,0,0,0,1,1,0,0,0,0,1,1,0,1,1},  //b
+  {1,1,0,1,0,0,1,1,0,1,1,0,1,1,1,0,1,0,1,0,1,0,0,1,1,0},  //c
+  {1,1,1,1,1,0,1,0,0,1,0,1,0,0,1,0,0,0,1,1,1,1,1,0,1,1},  //d
+  {1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,0,1,0,1,1,0,0,1,0,1},  //e
+  {0,1,0,0,1,1,1,1,0,0,1,1,0,0,0,1,1,0,1,1,0,1,1,0,1,0},  //f
+  {1,1,1,1,1,1,0,1,0,0,1,0,1,1,1,1,1,1,0,1,0,0,1,0,1,0} //g
+};
 
 #define one 41 //41
 #define two 39 //39
@@ -43,91 +61,6 @@ int led_matrix[7][10]={//[matrix letters][numbers]
 #define RED 255
 #define GREEN 255
 #define BLUE 255
-
-#define a1(x,y,z) leds[0] = CRGB(RED, GREEN, BLUE);\
-           leds[1] = CRGB(RED, GREEN, BLUE);\
-           leds[2] = CRGB(RED, GREEN, BLUE)
-#define b1(x,y,z) leds[0] = CRGB(RED, GREEN, BLUE);\
-           leds[1] = CRGB(RED, GREEN, BLUE);\
-           leds[2] = CRGB(RED, GREEN, BLUE)
-#define c1(x,y,z) leds[0] = CRGB(RED, GREEN, BLUE);\
-           leds[1] = CRGB(RED, GREEN, BLUE);\
-           leds[2] = CRGB(RED, GREEN, BLUE)
-#define d1(x,y,z) leds[0] = CRGB(RED, GREEN, BLUE);\
-           leds[1] = CRGB(RED, GREEN, BLUE);\
-           leds[2] = CRGB(RED, GREEN, BLUE)
-#define e1(x,y,z) leds[0] = CRGB(RED, GREEN, BLUE);\
-           leds[1] = CRGB(RED, GREEN, BLUE);\
-           leds[2] = CRGB(RED, GREEN, BLUE)
-#define f1(x,y,z) leds[0] = CRGB(RED, GREEN, BLUE);\
-           leds[1] = CRGB(RED, GREEN, BLUE);\
-           leds[2] = CRGB(RED, GREEN, BLUE)
-#define g1(x,y,z) leds[0] = CRGB(RED, GREEN, BLUE);\
-           leds[1] = CRGB(RED, GREEN, BLUE);\
-           leds[2] = CRGB(RED, GREEN, BLUE)
-#define a2(x,y,z) leds[0] = CRGB(RED, GREEN, BLUE);\
-           leds[1] = CRGB(RED, GREEN, BLUE);\
-           leds[2] = CRGB(RED, GREEN, BLUE)
-#define b2(x,y,z) leds[0] = CRGB(RED, GREEN, BLUE);\
-           leds[1] = CRGB(RED, GREEN, BLUE);\
-           leds[2] = CRGB(RED, GREEN, BLUE)
-#define c2(x,y,z) leds[0] = CRGB(RED, GREEN, BLUE);\
-           leds[1] = CRGB(RED, GREEN, BLUE);\
-           leds[2] = CRGB(RED, GREEN, BLUE)
-#define d2(x,y,z) leds[0] = CRGB(RED, GREEN, BLUE);\
-           leds[1] = CRGB(RED, GREEN, BLUE);\
-           leds[2] = CRGB(RED, GREEN, BLUE)
-#define e2(x,y,z) leds[0] = CRGB(RED, GREEN, BLUE);\
-           leds[1] = CRGB(RED, GREEN, BLUE);\
-           leds[2] = CRGB(RED, GREEN, BLUE)
-#define f2(x,y,z) leds[0] = CRGB(RED, GREEN, BLUE);\
-           leds[1] = CRGB(RED, GREEN, BLUE);\
-           leds[2] = CRGB(RED, GREEN, BLUE)
-#define g2(x,y,z) leds[0] = CRGB(RED, GREEN, BLUE);\
-           leds[1] = CRGB(RED, GREEN, BLUE);\
-           leds[2] = CRGB(RED, GREEN, BLUE)
-#define a3(x,y,z) leds[0] = CRGB(RED, GREEN, BLUE);\
-           leds[1] = CRGB(RED, GREEN, BLUE);\
-           leds[2] = CRGB(RED, GREEN, BLUE)
-#define b3(x,y,z) leds[0] = CRGB(RED, GREEN, BLUE);\
-           leds[1] = CRGB(RED, GREEN, BLUE);\
-           leds[2] = CRGB(RED, GREEN, BLUE)
-#define c3(x,y,z) leds[0] = CRGB(RED, GREEN, BLUE);\
-           leds[1] = CRGB(RED, GREEN, BLUE);\
-           leds[2] = CRGB(RED, GREEN, BLUE)
-#define d3(x,y,z) leds[0] = CRGB(RED, GREEN, BLUE);\
-           leds[1] = CRGB(RED, GREEN, BLUE);\
-           leds[2] = CRGB(RED, GREEN, BLUE)
-#define e3(x,y,z) leds[0] = CRGB(RED, GREEN, BLUE);\
-           leds[1] = CRGB(RED, GREEN, BLUE);\
-           leds[2] = CRGB(RED, GREEN, BLUE)
-#define f3(x,y,z) leds[0] = CRGB(RED, GREEN, BLUE);\
-           leds[1] = CRGB(RED, GREEN, BLUE);\
-           leds[2] = CRGB(RED, GREEN, BLUE)
-#define g3(x,y,z) leds[0] = CRGB(RED, GREEN, BLUE);\
-           leds[1] = CRGB(RED, GREEN, BLUE);\
-           leds[2] = CRGB(RED, GREEN, BLUE)
-#define a4(x,y,z) leds[0] = CRGB(RED, GREEN, BLUE);\
-           leds[1] = CRGB(RED, GREEN, BLUE);\
-           leds[2] = CRGB(RED, GREEN, BLUE)
-#define b4(x,y,z) leds[0] = CRGB(RED, GREEN, BLUE);\
-           leds[1] = CRGB(RED, GREEN, BLUE);\
-           leds[2] = CRGB(RED, GREEN, BLUE)
-#define c4(x,y,z) leds[0] = CRGB(RED, GREEN, BLUE);\
-           leds[1] = CRGB(RED, GREEN, BLUE);\
-           leds[2] = CRGB(RED, GREEN, BLUE)
-#define d4(x,y,z) leds[0] = CRGB(RED, GREEN, BLUE);\
-           leds[1] = CRGB(RED, GREEN, BLUE);\
-           leds[2] = CRGB(RED, GREEN, BLUE)
-#define e4(x,y,z) leds[0] = CRGB(RED, GREEN, BLUE);\
-           leds[1] = CRGB(RED, GREEN, BLUE);\
-           leds[2] = CRGB(RED, GREEN, BLUE)
-#define f4(x,y,z) leds[0] = CRGB(RED, GREEN, BLUE);\
-           leds[1] = CRGB(RED, GREEN, BLUE);\
-           leds[2] = CRGB(RED, GREEN, BLUE)
-#define g4(x,y,z) leds[0] = CRGB(RED, GREEN, BLUE);\
-           leds[1] = CRGB(RED, GREEN, BLUE);\
-           leds[2] = CRGB(RED, GREEN, BLUE)
            
 ///DIGITS         1234    a
 ///                     f   b
@@ -143,13 +76,6 @@ int led_matrix[7][10]={//[matrix letters][numbers]
 //                  g
 
 
-int p1=0;
-int p2=0;
-int p3=0;
-int p4=0;
-int p5=0;
-int p6=0;
-int p7=0;
 int pScore=0;
 int BallCounter=0;
 int MaxBalls=10;
@@ -238,48 +164,14 @@ if (digitalRead(two)==LOW) {
   while (digitalRead(seven)==LOW){delay(50);}
  }
 
+
+
 digits[0]=Score/1000;
 digits[1]=(Score/100)%10;
 digits[2]=(Score/10)%10;
 digits[3]=(Score)%10;
 
-red=1;
-blue=green=0;
-
-a1(led_matrix[a][digits[0]*red],led_matrix[a][digits[0]*green],led_matrix[a][digits[0]*blue]);
-b1(led_matrix[b][digits[0]*red],led_matrix[b][digits[0]*green],led_matrix[b][digits[0]*blue]);
-c1(led_matrix[c][digits[0]*red],led_matrix[c][digits[0]*green],led_matrix[c][digits[0]*blue]);
-d1(led_matrix[d][digits[0]*red],led_matrix[d][digits[0]*green],led_matrix[d][digits[0]*blue]);
-e1(led_matrix[e][digits[0]*red],led_matrix[e][digits[0]*green],led_matrix[e][digits[0]*blue]);
-f1(led_matrix[f][digits[0]*red],led_matrix[f][digits[0]*green],led_matrix[f][digits[0]*blue]);
-g1(led_matrix[g][digits[0]*red],led_matrix[g][digits[0]*green],led_matrix[g][digits[0]*blue]);
-
-a2(led_matrix[a][digits[1]*red],led_matrix[a][digits[1]*green],led_matrix[a][digits[1]*blue]);
-b2(led_matrix[b][digits[1]*red],led_matrix[b][digits[1]*green],led_matrix[b][digits[1]*blue]);
-c2(led_matrix[c][digits[1]*red],led_matrix[c][digits[1]*green],led_matrix[c][digits[1]*blue]);
-d2(led_matrix[d][digits[1]*red],led_matrix[d][digits[1]*green],led_matrix[d][digits[1]*blue]);
-e2(led_matrix[e][digits[1]*red],led_matrix[e][digits[1]*green],led_matrix[e][digits[1]*blue]);
-f2(led_matrix[f][digits[1]*red],led_matrix[f][digits[1]*green],led_matrix[f][digits[1]*blue]);
-g2(led_matrix[g][digits[1]*red],led_matrix[g][digits[1]*green],led_matrix[g][digits[1]*blue]);
-
-a3(led_matrix[a][digits[2]*red],led_matrix[a][digits[2]*green],led_matrix[a][digits[2]*blue]);
-b3(led_matrix[b][digits[2]*red],led_matrix[b][digits[2]*green],led_matrix[b][digits[2]*blue]);
-c3(led_matrix[c][digits[2]*red],led_matrix[c][digits[2]*green],led_matrix[c][digits[2]*blue]);
-d3(led_matrix[d][digits[2]*red],led_matrix[d][digits[2]*green],led_matrix[d][digits[2]*blue]);
-e3(led_matrix[e][digits[2]*red],led_matrix[e][digits[2]*green],led_matrix[e][digits[2]*blue]);
-f3(led_matrix[f][digits[2]*red],led_matrix[f][digits[2]*green],led_matrix[f][digits[2]*blue]);
-g3(led_matrix[g][digits[2]*red],led_matrix[g][digits[2]*green],led_matrix[g][digits[2]*blue]);
-
-a4(led_matrix[a][digits[3]*red],led_matrix[a][digits[3]*green],led_matrix[a][digits[3]*blue]);
-b4(led_matrix[b][digits[3]*red],led_matrix[b][digits[3]*green],led_matrix[b][digits[3]*blue]);
-c4(led_matrix[c][digits[3]*red],led_matrix[c][digits[3]*green],led_matrix[c][digits[3]*blue]);
-d4(led_matrix[d][digits[3]*red],led_matrix[d][digits[3]*green],led_matrix[d][digits[3]*blue]);
-e4(led_matrix[e][digits[3]*red],led_matrix[e][digits[3]*green],led_matrix[e][digits[3]*blue]);
-f4(led_matrix[f][digits[3]*red],led_matrix[f][digits[3]*green],led_matrix[f][digits[3]*blue]);
-g4(led_matrix[g][digits[3]*red],led_matrix[g][digits[3]*green],led_matrix[g][digits[3]*blue]);
-
-//lcd.setCursor(0,0);
-//lcd.print("Balls:");
+/////////////////////////////////////CORRECT CODE GOES HERE
  int math=MaxBalls-BallCounter;
 //lcd.print(math);
 //lcd.setCursor(10,1);
